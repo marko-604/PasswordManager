@@ -20,7 +20,7 @@ A secure password manager built with Java Swing, implementing AES encryption for
 
 1. Clone this repository:  
    ```sh
-   git clone https://github.com/marko-mat/PasswordManager.git
+   git clone https://github.com/marko-604/PasswordManager.git
    ```  
 2. Navigate to the project directory:  
    ```sh
