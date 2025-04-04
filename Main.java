@@ -13,24 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main extends JFrame {
-    // File where credentials are stored
     private static String FILE_NAME = "passwords.dat";
     private static final String KEY_FILE = "secret.key";
     private static SecretKey secretKey;
     private static Map<String, String> credentials = new HashMap<>();
 
-    // GUI components
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JTextArea outputArea;
 
     public Main() {
-        setTitle("Password Manager"); // Window title
-        setSize(400, 250); // Window size
+        setTitle("Password Manager");
+        setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(4, 1));
 
-        // Input Panel (for username & password)
+        // Input Panel
         JPanel inputPanel = new JPanel(new GridLayout(2, 2));
         inputPanel.add(new JLabel("Username:"));
         usernameField = new JTextField();
@@ -40,7 +38,7 @@ public class Main extends JFrame {
         inputPanel.add(passwordField);
         add(inputPanel);
 
-        // Buttons Panel
+        // Buttons 
         JPanel buttonPanel = new JPanel();
         JButton addButton = new JButton("Add Credential");
         JButton retrieveButton = new JButton("Retrieve Password");
@@ -48,7 +46,7 @@ public class Main extends JFrame {
         buttonPanel.add(retrieveButton);
         add(buttonPanel);
 
-        // Output Area (to show messages and retrieved passwords)
+        // Output Area
         outputArea = new JTextArea();
         outputArea.setEditable(false);
         add(new JScrollPane(outputArea));
@@ -61,33 +59,32 @@ public class Main extends JFrame {
             outputArea.setText("Error loading data!");
         }
 
-        // Button Actions
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addOrRetrieveCredential(true); // Calls method to add credential
+                addOrRetrieveCredential(true); 
             }
         });
 
         retrieveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addOrRetrieveCredential(false); // Calls method to retrieve credential
+                addOrRetrieveCredential(false); 
             }
         });
     }
 
     // Handles adding or retrieving credentials
     private void addOrRetrieveCredential(boolean isAdding) {
-        String username = usernameField.getText().trim(); // Get username input
-        String password = new String(passwordField.getPassword()).trim(); // Get password input
+        String username = usernameField.getText().trim(); 
+        String password = new String(passwordField.getPassword()).trim(); 
 
         if (username.isEmpty()) {
             outputArea.setText("Username cannot be empty.");
             return;
         }
 
-        if (isAdding) { // If user is adding a new credential
+        if (isAdding) { 
             if (password.isEmpty()) {
                 outputArea.setText("Password cannot be empty when adding a credential.");
                 return;
@@ -107,7 +104,7 @@ public class Main extends JFrame {
             } catch (Exception ex) {
                 outputArea.setText("Error saving credentials.");
             }
-        } else { // If user is retrieving a password
+        } else { 
             String retrievedPassword = credentials.get(username);
             if (retrievedPassword != null) {
                 outputArea.setText("Password: " + retrievedPassword);
@@ -163,7 +160,7 @@ public class Main extends JFrame {
         return new String(decrypted);
     }
 
-    // Main method - launches the GUI
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Main().setVisible(true));
     }
